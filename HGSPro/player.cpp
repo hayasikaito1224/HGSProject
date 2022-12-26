@@ -17,6 +17,11 @@ CPlayer::CPlayer(OBJTYPE nPriority) : CScene(nPriority)
 {
 	m_State = CPlayer::STATE::NORMAL;
 	m_pPolygon = nullptr;
+	m_bPlay = false;
+	for (int nCnt = 0; nCnt < NumPlayer; nCnt++)
+	{
+		m_nPushCounter[nCnt] = 0;
+	}
 }
 
 CPlayer::~CPlayer()
@@ -51,10 +56,14 @@ void CPlayer::Uninit()
 //=============================================================================
 void CPlayer::Update()
 {
-	PushTrigger(DIK_A, 0);
-	PushTrigger(DIK_D, 0);
-	PushTrigger(DIK_SEMICOLON, 1);
-	PushTrigger(DIK_RBRACKET, 1);
+	if (m_bPlay)
+	{
+		PushTrigger(DIK_A, 0);
+		PushTrigger(DIK_D, 0);
+		PushTrigger(DIK_SEMICOLON, 1);
+		PushTrigger(DIK_RBRACKET, 1);
+
+	}
 
 }
 
