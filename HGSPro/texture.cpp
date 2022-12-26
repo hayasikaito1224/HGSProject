@@ -65,6 +65,10 @@ void CTexture::Init(void)
 	D3DXCreateTextureFromFile(pDevice,
 		"data/TEXTURE/2P.png",//数字
 		&m_pTexture[PLAYER02]);
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/Tower000.png",//数字
+		&m_pTexture[TOWER]);
 
 	//============================================================
 	//タイトル

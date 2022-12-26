@@ -27,6 +27,7 @@ public:
 		TIME,			// タイムナンバー
 		FADE,			
 		Title,			//タイトル背景
+		TOWER,
 		WIN,
 		LOSE,
 		PLAYER01,

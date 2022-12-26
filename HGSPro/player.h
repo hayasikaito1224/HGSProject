@@ -8,7 +8,7 @@
 #include "scene.h"
 
 class CPolygon;
-
+class CVibrationPolygon;
 class CPlayer : public CScene
 {
 public:
@@ -39,8 +39,11 @@ public:
 	void SetPlay(bool bPlay) { m_bPlay = bPlay; }
 private:
 	int m_nPushCounter[NumPlayer];
+	int m_nVibTime[NumPlayer];
 	bool m_bPlay;
 	CPolygon *m_pPolygon;
+	CVibrationPolygon *m_pPlayer[NumPlayer];
+
 	STATE m_State;
 };
 

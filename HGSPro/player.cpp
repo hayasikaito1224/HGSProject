@@ -8,10 +8,17 @@
 #include "keyboard.h"
 #include "Renderer.h"
 #include "manager.h"
+#include "vibrationPolygon.h"
 
 static const int CntLeaveMax_1 = 100;
 static const int CntLeaveMax_2 = 200;
+static const int VibTimeMax = 30;
+static const float VibFrame = 2.0f;
+static const float VibWidth = 5.0f;
 
+static const D3DXVECTOR3 Player01Pos = { 200.0f,500.0f,0.0f };
+static const D3DXVECTOR3 Player02Pos = { 700.0f,500.0f,0.0f };
+static const D3DXVECTOR3 PlayerSize = { 100.0f,60.0f,0.0f };
 
 CPlayer::CPlayer(OBJTYPE nPriority) : CScene(nPriority)
 {
@@ -20,7 +27,10 @@ CPlayer::CPlayer(OBJTYPE nPriority) : CScene(nPriority)
 	m_bPlay = false;
 	for (int nCnt = 0; nCnt < NumPlayer; nCnt++)
 	{
+		m_nVibTime[nCnt] = 0;
+		m_pPlayer[nCnt] = nullptr;
 		m_nPushCounter[nCnt] = 0;
+
 	}
 }
 
@@ -32,9 +42,24 @@ CPlayer::~CPlayer()
 //=============================================================================
 HRESULT CPlayer::Init()
 {
-	if (!m_pPolygon)
+
+	if (!m_pPlayer[0])
 	{
-		m_pPolygon = CPolygon::Create({ SCREEN_WIDTH/2.0f,SCREEN_HEIGHT/2.0f,0.0 }, { 100.0f,100.0f,0.0 }, CTexture::Type::Test, {1.0,1.0,1.0,1.0},CScene::OBJTYPE_PLAYER);
+		m_pPlayer[0] = CVibrationPolygon::Create(Player01Pos, PlayerSize, CTexture::Type::PLAYER01);
+		m_pPlayer[0]->SetVibesWidth(VibWidth);
+		m_pPlayer[0]->SetVibseFrame(VibFrame);
+		m_pPlayer[0]->SetVibration(false);
+
+
+	}
+	if (!m_pPlayer[1])
+	{
+		m_pPlayer[1] = CVibrationPolygon::Create(Player02Pos, PlayerSize, CTexture::Type::PLAYER02);
+		m_pPlayer[1]->SetVibesWidth(VibWidth);
+		m_pPlayer[1]->SetVibseFrame(VibFrame);
+		m_pPlayer[1]->SetVibration(false);
+
+
 	}
 	return S_OK;
 }
@@ -49,6 +74,11 @@ void CPlayer::Uninit()
 		m_pPolygon->Uninit();
 		m_pPolygon = nullptr;
 	}
+	for (int nCnt = 0; nCnt < NumPlayer; nCnt++)
+	{
+		m_pPlayer[nCnt]->Uninit();
+		m_pPlayer[nCnt] = nullptr;
+	}
 }
 
 //=============================================================================
@@ -56,6 +86,7 @@ void CPlayer::Uninit()
 //=============================================================================
 void CPlayer::Update()
 {
+
 	if (m_bPlay)
 	{
 		PushTrigger(DIK_A, 0);
@@ -64,7 +95,13 @@ void CPlayer::Update()
 		PushTrigger(DIK_RBRACKET, 1);
 
 	}
-
+	else
+	{
+		for (int nCnt = 0; nCnt < NumPlayer; nCnt++)
+		{
+			m_pPlayer[nCnt]->SetVibration(false);
+		}
+	}
 }
 
 //=============================================================================
@@ -121,6 +158,23 @@ void CPlayer::PushTrigger(int nKey, int nPlayer)
 	if(pKey->GetTrigger(nKey))
 	{
 		m_nPushCounter[nPlayer]++;
+		m_nVibTime[nPlayer] = VibTimeMax;
+	}
+	else
+	{
+		m_nVibTime[nPlayer]--;
+		if (m_nVibTime[nPlayer] <= 0)
+		{
+			m_nVibTime[nPlayer] = 0;
+		}
+	}
+	if (m_nVibTime[nPlayer] > 0)
+	{
+		m_pPlayer[nPlayer]->SetVibration(true);
+	}
+	else
+	{
+		m_pPlayer[nPlayer]->SetVibration(false);
 	}
 }
 //=============================================================================

@@ -120,7 +120,9 @@
     <ClCompile Include="move_ui.cpp">
       <Filter>Script\UI系</Filter>
     </ClCompile>
-    <ClCompile Include="vibrationPolygon.cpp" />
+    <ClCompile Include="vibrationPolygon.cpp">
+      <Filter>Script\ゲーム</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="title.h">
@@ -183,6 +185,8 @@
     <ClInclude Include="move_ui.h">
       <Filter>Script\UI系</Filter>
     </ClInclude>
-    <ClInclude Include="vibrationPolygon.h" />
+    <ClInclude Include="vibrationPolygon.h">
+      <Filter>Script\ゲーム</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

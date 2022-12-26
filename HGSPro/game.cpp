@@ -18,8 +18,8 @@ CBg		*CGame::m_pBg = nullptr;
 CPlayer *CGame::m_pPlayer = nullptr;
 CTimer *CGame::m_pTimer = nullptr;
 //定数定義
-static const int MaxGameTime = 3;//制限時間
-
+static const int MaxGameTime = 30;//制限時間
+static const float MaxFallDown = 90.0f;
 static const D3DXVECTOR3 TimerPos = { SCREEN_WIDTH / 2.0f,100.0f,0.0f };
 static const D3DXVECTOR3 TargetUIPos = { SCREEN_WIDTH / 2.0f,300.0f,0.0f };
 static const D3DXVECTOR3 StartUIPos = { SCREEN_WIDTH / 2.0f,SCREEN_HEIGHT/2.0f ,0.0f };
@@ -50,6 +50,9 @@ CGame::CGame()
 	m_pTargetUI = nullptr;
 	m_pLoseUI = nullptr;
 	m_pFinishUI = nullptr;
+	m_pTutorial = nullptr;
+	m_pBg02 = nullptr;
+	m_pTower = nullptr;
 	m_bResult = false;
 	m_nUITimer = 0;
 }
@@ -64,15 +67,19 @@ CGame::~CGame()
 //--------------------------------------------
 HRESULT CGame::Init(void)
 {
-	//if (!m_pBg)
-	//{
-	//	m_pBg = CBg::Create(CTexture::Type::TIME);
-	//}
-
-	if (!m_pTargetUI)
+	m_State = CGame::STATE::START;
+	if (!m_pTutorial)
 	{
-		m_pTargetUI = CMove_UI::Create(TargetUIPos, TargetUISize, 20, 10, CTexture::Type::Test, CMove_UI::UI_Type::Type_Target);
+		m_pTutorial = CPolygon::Create({ SCREEN_WIDTH / 2.0f,400.0f,0.0 }, { 200.0f,250.0f,0.0f }, CTexture::Test, { 1.0,1.0,1.0,1.0 }, CScene::OBJTYPE::OBJTYPE_FADE);
 	}
+
+	if (!m_pBg02)
+	{
+		m_pBg02 = CBg::Create(CTexture::Type::FADE,CScene::OBJTYPE::OBJTYPE_FADE);
+		m_pBg02->SetCol({ 1.0,1.0,1.0,0.5f });
+	}
+
+
 	if (!m_pTimer)
 	{
 		m_pTimer = CTimer::Create(TimerPos, { 1.0,1.0,1.0,1.0 }, CTimer::STATE::SUB, MaxGameTime, false);
@@ -81,6 +88,10 @@ HRESULT CGame::Init(void)
 	{
 		m_pPlayer = CPlayer::Create();
 	}
+	if (!m_pTower)
+	{
+		m_pTower = CPolygon::Create({ SCREEN_WIDTH / 2.0f,600.0f,0.0f }, { 120.0f,200.0f,0.0f }, CTexture::Type::TOWER);
+	}
 	return S_OK;
 }
 //--------------------------------------------
@@ -88,6 +99,21 @@ HRESULT CGame::Init(void)
 //--------------------------------------------
 void CGame::Uninit(void)
 {
+	if (m_pTower)
+	{
+		m_pTower->Uninit();
+		m_pTower = nullptr;
+	}
+	if (m_pTutorial)
+	{
+		m_pTutorial->Uninit();
+		m_pTutorial = nullptr;
+	}
+	if (m_pBg02)
+	{
+		m_pBg02->Uninit();
+		m_pBg02 = nullptr;
+	}
 	if (m_pBg)
 	{
 		m_pBg->Uninit();
@@ -135,39 +161,122 @@ void CGame::Uninit(void)
 void CGame::Update(void)
 {
 	CInputKeyBoard *pKey = CManager::GetInputKeyboard();
+	int nDifference01 =0;
+	int nDifference02 =0;
 
-	m_nUITimer++;
-	if (m_nUITimer >= StartUIPop)
+	switch (m_State)
 	{
-		if (!m_pStartUI)
+	case CGame::STATE::START:
+		if (pKey->GetTrigger(DIK_SPACE))
 		{
-			m_pStartUI = CMove_UI::Create(StartUIPos, StartUISize, 10, 10, CTexture::Type::Test, CMove_UI::UI_Type::Type_Start);
+			m_State = CGame::STATE::NORMAL;
+			if (m_pTutorial)
+			{
+				m_pTutorial->Uninit();
+				m_pTutorial = nullptr;
+			}
+			if (m_pBg02)
+			{
+				m_pBg02->Uninit();
+				m_pBg02 = nullptr;
+			}
+			if (!m_pTargetUI)
+			{
+				m_pTargetUI = CMove_UI::Create(TargetUIPos, TargetUISize, 20, 10, CTexture::Type::Test, CMove_UI::UI_Type::Type_Target);
+			}
 		}
-	}
-	if (m_nUITimer >= TimerPop && !m_bStartTimer)
-	{
-		m_pPlayer->SetPlay(true);
-		m_bStartTimer = true;
-		m_pTimer->SetCanCount(true);
-	}
-	//時間切れ
-	if (m_nUITimer >= FinishUIPop)
-	{
-		
-		if (!m_pFinishUI)
-		{
-			m_pFinishUI = CMove_UI::Create(StartUIPos, StartUISize, 30, 10, CTexture::Type::Test, CMove_UI::UI_Type::Type_Start);
-		}
-		m_pTimer->SetCanCount(false);
+		break;
+	case CGame::STATE::NORMAL:
 
-	}
-	//勝敗のUIの表示
-	if (m_nUITimer >= ResultPop && !m_bResult)
-	{
-		m_bResult = true;
+		if (m_pTower)
+		{
+			//カウンターの差分
+			int nDifference01 = m_pPlayer->GetPushCnt()[0] - m_pPlayer->GetPushCnt()[1];
+
+			m_pTower->SetAngle(D3DXToRadian(nDifference01));
+		}
+		m_nUITimer++;
+		if (m_nUITimer >= StartUIPop)
+		{
+			if (!m_pStartUI)
+			{
+				m_pStartUI = CMove_UI::Create(StartUIPos, StartUISize, 10, 10, CTexture::Type::Test, CMove_UI::UI_Type::Type_Start);
+			}
+		}
+		if (m_nUITimer >= TimerPop && !m_bStartTimer)
+		{
+			m_pPlayer->SetPlay(true);
+			m_bStartTimer = true;
+			m_pTimer->SetCanCount(true);
+		}
+		//時間切れ
+		if (m_nUITimer >= FinishUIPop)
+		{
+
+			if (!m_pFinishUI)
+			{
+				m_pFinishUI = CMove_UI::Create(StartUIPos, StartUISize, 30, 10, CTexture::Type::Test, CMove_UI::UI_Type::Type_Start);
+			}
+			m_pTimer->SetCanCount(false);
+
+		}
+		//勝敗のUIの表示
+		if (m_nUITimer >= ResultPop && !m_bResult)
+		{
+			m_State = CGame::STATE::END;
+			m_bResult = true;
+			m_pPlayer->SetPlay(false);
+		}
+
+
+		break;
+	case CGame::STATE::END:
 		//カウンターの差分
-		int nDifference01 = m_pPlayer->GetPushCnt()[0] - m_pPlayer->GetPushCnt()[1];
-		int nDifference02 = m_pPlayer->GetPushCnt()[1] - m_pPlayer->GetPushCnt()[0];
+		nDifference01 = m_pPlayer->GetPushCnt()[0] - m_pPlayer->GetPushCnt()[1];
+		nDifference02 = m_pPlayer->GetPushCnt()[1] - m_pPlayer->GetPushCnt()[0];
+		//１Pのほうが多かったら
+		if (nDifference01 > nDifference02)
+		{
+			m_bEnd_FallDownR = true;
+		}
+		else if (nDifference01 < nDifference02)
+		{
+			m_bEnd_FallDownR = false;
+		}
+		if (m_bEnd_FallDownR)
+		{
+			if (m_pTower)
+			{
+				//カウンターの差分
+				int Angle = m_pTower->GetAngle();
+				Angle++;
+				m_pTower->SetAngle(D3DXToRadian(Angle));
+				if (Angle >= MaxFallDown)
+				{
+					m_State = CGame::STATE::END;
+				}
+			}
+		}
+		else
+		{
+			if (m_pTower)
+			{
+				//カウンターの差分
+				int Angle = m_pTower->GetAngle();
+				Angle--;
+				m_pTower->SetAngle(D3DXToRadian(Angle));
+				if (Angle <= -MaxFallDown)
+				{
+					m_State = CGame::STATE::END;
+				}
+
+			}
+		}
+		break;
+	case CGame::STATE::RESULT:
+		//カウンターの差分
+		nDifference01 = m_pPlayer->GetPushCnt()[0] - m_pPlayer->GetPushCnt()[1];
+		nDifference02 = m_pPlayer->GetPushCnt()[1] - m_pPlayer->GetPushCnt()[0];
 		//１Pのほうが多かったら
 		if (nDifference01 > nDifference02)
 		{
@@ -192,17 +301,19 @@ void CGame::Update(void)
 			}
 		}
 
-
-	}
-	//勝負の結果が表示されてたら
-	if (m_bResult)
-	{
-		if (pKey->GetTrigger(DIK_SPACE)) 
+		//勝負の結果が表示されてたら
+		if (m_bResult)
 		{
-			Reset();
+			if (pKey->GetTrigger(DIK_SPACE))
+			{
+				Reset();
 
+			}
 		}
+
+		break;
 	}
+
 
 
 }
@@ -219,6 +330,11 @@ void CGame::Reset()
 	m_nUITimer = 0;
 	m_bStartTimer = false;
 	m_bResult = false;
+	if (m_pTower)
+	{
+		m_pTower->Uninit();
+		m_pTower = nullptr;
+	}
 	if (m_pBg)
 	{
 		m_pBg->Uninit();
@@ -255,6 +371,16 @@ void CGame::Reset()
 	if (m_pStartUI)
 	{
 		m_pStartUI = nullptr;
+	}
+	if (m_pTutorial)
+	{
+		m_pTutorial->Uninit();
+		m_pTutorial = nullptr;
+	}
+	if (m_pBg02)
+	{
+		m_pBg02->Uninit();
+		m_pBg02 = nullptr;
 	}
 	CScene::Delete();
 	Init();
