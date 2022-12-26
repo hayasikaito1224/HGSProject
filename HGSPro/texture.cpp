@@ -49,6 +49,14 @@ void CTexture::Init(void)
 	D3DXCreateTextureFromFile(pDevice,
 		"data/TEXTURE/fade.png",//数字
 		&m_pTexture[FADE]);
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/fade.png",//数字
+		&m_pTexture[WIN]);
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/fade.png",//数字
+		&m_pTexture[LOSE]);
 
 	//============================================================
 	//タイトル

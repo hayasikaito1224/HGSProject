@@ -35,6 +35,7 @@ public:
 	void DebugTextDraw();
 	void PushTrigger(int nKey,int nPlayer);
 	void PushCntDeduction();//ƒvƒŒƒCƒ„[‚Ì‰Ÿ‰º”‚Ì·‚µˆø‚«
+	int *GetPushCnt() { return m_nPushCounter; }
 private:
 	int m_nPushCounter[NumPlayer];
 	CPolygon *m_pPolygon;

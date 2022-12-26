@@ -24,9 +24,10 @@ public:
 	static CPolygon *Create(D3DXVECTOR3 pos, D3DXVECTOR3 scale, CTexture::Type texture, D3DXCOLOR col = {1.0,1.0,1.0,1.0},int nPriority = OBJTYPE_POLYGON);
 	void SetPos(D3DXVECTOR3 pos);
 	D3DXVECTOR3 GetPos() { return m_pos; }
+	void SetScale(D3DXVECTOR3 scale);
 	D3DXVECTOR3 GetScale() { return m_Scale; }
 	void SetDraw(bool bDraw) { m_bDraw = bDraw; }
-	D3DXCOLOR GetColor() { return m_col; }
+	D3DXCOLOR GetCol() { return m_col; }
 	void SetCol(D3DXCOLOR col);
 private:
 	D3DXVECTOR3 m_Scale;

@@ -26,7 +26,6 @@ CPolygon::~CPolygon()
 //------------------------------------------------------------
 //頂点座標の設定
 //------------------------------------------------------------
-
 void CPolygon::SetPos(D3DXVECTOR3 pos)
 {
 	CScene::SetPos(pos);
@@ -40,6 +39,25 @@ void CPolygon::SetPos(D3DXVECTOR3 pos)
 	pVtx[1].pos = D3DXVECTOR3(pos.x + m_Scale.x, pos.y - m_Scale.y, 0.0f);
 	pVtx[2].pos = D3DXVECTOR3(pos.x - m_Scale.x, pos.y + m_Scale.y, 0.0f);
 	pVtx[3].pos = D3DXVECTOR3(pos.x + m_Scale.x, pos.y + m_Scale.y, 0.0f);
+
+	m_pVtxBuff->Unlock();
+
+}
+//------------------------------------------------------------
+//サイズの設定
+//------------------------------------------------------------
+void CPolygon::SetScale(D3DXVECTOR3 scale)
+{
+	m_Scale = scale;
+	VERTEX_2D *pVtx;
+
+	m_pVtxBuff->Lock(0, 0, (void**)&pVtx, 0);
+
+	//バッファの生成
+	pVtx[0].pos = D3DXVECTOR3(m_pos.x - m_Scale.x, m_pos.y - m_Scale.y, 0.0f);
+	pVtx[1].pos = D3DXVECTOR3(m_pos.x + m_Scale.x, m_pos.y - m_Scale.y, 0.0f);
+	pVtx[2].pos = D3DXVECTOR3(m_pos.x - m_Scale.x, m_pos.y + m_Scale.y, 0.0f);
+	pVtx[3].pos = D3DXVECTOR3(m_pos.x + m_Scale.x, m_pos.y + m_Scale.y, 0.0f);
 
 	m_pVtxBuff->Unlock();
 
@@ -74,7 +92,6 @@ HRESULT CPolygon::Init()
 	CScene2D::SetCol(m_col);
 	return S_OK;
 }
-
 //=============================================================================
 //終了
 //=============================================================================
