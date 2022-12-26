@@ -36,8 +36,10 @@ public:
 	void PushTrigger(int nKey,int nPlayer);
 	void PushCntDeduction();//ƒvƒŒƒCƒ„[‚Ì‰Ÿ‰º”‚Ì·‚µˆø‚«
 	int *GetPushCnt() { return m_nPushCounter; }
+	void SetPlay(bool bPlay) { m_bPlay = bPlay; }
 private:
 	int m_nPushCounter[NumPlayer];
+	bool m_bPlay;
 	CPolygon *m_pPolygon;
 	STATE m_State;
 };
