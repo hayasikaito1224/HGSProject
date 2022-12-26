@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Script">
+      <UniqueIdentifier>{00019d6e-5cae-4245-97f9-9da8c5d9dae8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\タイトル">
+      <UniqueIdentifier>{0e047f0c-74ac-4085-9e20-12e84fe008fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\ゲーム">
+      <UniqueIdentifier>{3da36823-790a-4c01-8dd6-dc79aaf0bf86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\リザルト">
+      <UniqueIdentifier>{7fa773b4-8722-4207-a2ea-3b750b62d217}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\マネージャー系">
+      <UniqueIdentifier>{f336aff2-1bb7-4fe2-981b-99fba6105cd6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\メイン">
+      <UniqueIdentifier>{17c59774-1fa8-47bf-ad47-f2cb499f779e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\オブジェクト">
+      <UniqueIdentifier>{7e2d726e-5a24-4c47-8573-d7fc54a9baab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\サウンド">
+      <UniqueIdentifier>{b259e8b8-387b-4134-b663-d28c0f9d3eb1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\フェード">
+      <UniqueIdentifier>{babfcb7a-15d2-46f2-9894-969763b93f1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\エフェクト（まだ使ってない）">
+      <UniqueIdentifier>{ba45546c-ff19-4a71-935b-55a832428cd0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\ナンバー">
+      <UniqueIdentifier>{1217285c-aa6a-4d2a-8cfc-3517fce98b3d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\背景">
+      <UniqueIdentifier>{f08f080f-c51a-4221-96f2-152017d3871f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\入力">
+      <UniqueIdentifier>{7a01f027-cbac-4415-88c1-c41272b54240}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\テクスチャ">
+      <UniqueIdentifier>{e5d1f697-c70d-4aac-a6cc-76b3cb78990e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\描画">
+      <UniqueIdentifier>{7fb57ca1-54bd-4464-b4e3-c33dab5e1608}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\ポリゴン">
+      <UniqueIdentifier>{11f7df50-9815-4b35-b46d-0b2ce2043d00}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="title.cpp">
+      <Filter>Script\タイトル</Filter>
+    </ClCompile>
+    <ClCompile Include="game.cpp">
+      <Filter>Script\ゲーム</Filter>
+    </ClCompile>
+    <ClCompile Include="result.cpp">
+      <Filter>Script\リザルト</Filter>
+    </ClCompile>
+    <ClCompile Include="manager.cpp">
+      <Filter>Script\マネージャー系</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Script\メイン</Filter>
+    </ClCompile>
+    <ClCompile Include="scene.cpp">
+      <Filter>Script\オブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="scene2D.cpp">
+      <Filter>Script\オブジェクト</Filter>
+    </ClCompile>
+    <ClCompile Include="sound.cpp">
+      <Filter>Script\サウンド</Filter>
+    </ClCompile>
+    <ClCompile Include="fade.cpp">
+      <Filter>Script\フェード</Filter>
+    </ClCompile>
+    <ClCompile Include="effect2d.cpp">
+      <Filter>Script\エフェクト（まだ使ってない）</Filter>
+    </ClCompile>
+    <ClCompile Include="2Dnumber.cpp">
+      <Filter>Script\ナンバー</Filter>
+    </ClCompile>
+    <ClCompile Include="bg.cpp">
+      <Filter>Script\背景</Filter>
+    </ClCompile>
+    <ClCompile Include="input.cpp">
+      <Filter>Script\入力</Filter>
+    </ClCompile>
+    <ClCompile Include="keyboard.cpp">
+      <Filter>Script\入力</Filter>
+    </ClCompile>
+    <ClCompile Include="texture.cpp">
+      <Filter>Script\テクスチャ</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\デスクトップアプリ避難所\cluster-s-slayer\cluster%27s slayer\Renderer.cpp">
+      <Filter>Script\描画</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\デスクトップアプリ避難所\cluster-s-slayer\cluster%27s slayer\polygon.cpp">
+      <Filter>Script\ポリゴン</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="title.h">
+      <Filter>Script\タイトル</Filter>
+    </ClInclude>
+    <ClInclude Include="game.h">
+      <Filter>Script\ゲーム</Filter>
+    </ClInclude>
+    <ClInclude Include="result.h">
+      <Filter>Script\リザルト</Filter>
+    </ClInclude>
+    <ClInclude Include="manager.h">
+      <Filter>Script\マネージャー系</Filter>
+    </ClInclude>
+    <ClInclude Include="main.h">
+      <Filter>Script\メイン</Filter>
+    </ClInclude>
+    <ClInclude Include="scene.h">
+      <Filter>Script\オブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="scene2D.h">
+      <Filter>Script\オブジェクト</Filter>
+    </ClInclude>
+    <ClInclude Include="sound.h">
+      <Filter>Script\サウンド</Filter>
+    </ClInclude>
+    <ClInclude Include="fade.h">
+      <Filter>Script\フェード</Filter>
+    </ClInclude>
+    <ClInclude Include="effect2d.h">
+      <Filter>Script\エフェクト（まだ使ってない）</Filter>
+    </ClInclude>
+    <ClInclude Include="2Dnumber.h">
+      <Filter>Script\ナンバー</Filter>
+    </ClInclude>
+    <ClInclude Include="bg.h">
+      <Filter>Script\背景</Filter>
+    </ClInclude>
+    <ClInclude Include="input.h">
+      <Filter>Script\入力</Filter>
+    </ClInclude>
+    <ClInclude Include="keyboard.h">
+      <Filter>Script\入力</Filter>
+    </ClInclude>
+    <ClInclude Include="texture.h">
+      <Filter>Script\テクスチャ</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\デスクトップアプリ避難所\cluster-s-slayer\cluster%27s slayer\Renderer.h">
+      <Filter>Script\描画</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\デスクトップアプリ避難所\cluster-s-slayer\cluster%27s slayer\Polygon.h">
+      <Filter>Script\ポリゴン</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
