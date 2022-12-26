@@ -5,12 +5,10 @@
 #include "input.h"
 #include "scene.h"
 #include "scene2D.h"
-#include "camera.h"
 #include "manager.h"
 #include "game.h"
 
 static bool s_bOnece = false;
-CCamera		*CRenderer::m_pCamera[2];
 
 //=============================================================================
 // コンストラクタ
@@ -97,21 +95,21 @@ HRESULT CRenderer::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 	m_pD3DDevice->SetRenderState(D3DRS_ALPHABLENDENABLE, TRUE);				// αブレンドを行う
 	m_pD3DDevice->SetRenderState(D3DRS_SRCBLEND, D3DBLEND_SRCALPHA);		// αソースカラーの指定
 	m_pD3DDevice->SetRenderState(D3DRS_DESTBLEND, D3DBLEND_INVSRCALPHA);	// αデスティネーションカラーの指定
-	////フォグの処理
-	//float Start = 0.0f;    // For linear mode
-	//float End = 2000.0f;
-	//float Density = 0.03f;   // For exponential modes
-	//						 // Enable fog blending.
-	//m_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, TRUE);
+																			////フォグの処理
+																			//float Start = 0.0f;    // For linear mode
+																			//float End = 2000.0f;
+																			//float Density = 0.03f;   // For exponential modes
+																			//						 // Enable fog blending.
+																			//m_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, TRUE);
 
-	//// Set the fog color.
-	//m_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DCOLOR_ARGB(255, 0, 0, 0));
+																			//// Set the fog color.
+																			//m_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DCOLOR_ARGB(255, 0, 0, 0));
 
-	//// Set fog parameters.
-	//m_pD3DDevice->SetRenderState(D3DRS_FOGTABLEMODE, D3DFOG_LINEAR);
-	//m_pD3DDevice->SetRenderState(D3DRS_FOGSTART, *(DWORD *)(&Start));
-	//m_pD3DDevice->SetRenderState(D3DRS_FOGEND, *(DWORD *)(&End));
-	//m_pD3DDevice->SetRenderState(D3DRS_FOGDENSITY, *(DWORD *)(&Density));
+																			//// Set fog parameters.
+																			//m_pD3DDevice->SetRenderState(D3DRS_FOGTABLEMODE, D3DFOG_LINEAR);
+																			//m_pD3DDevice->SetRenderState(D3DRS_FOGSTART, *(DWORD *)(&Start));
+																			//m_pD3DDevice->SetRenderState(D3DRS_FOGEND, *(DWORD *)(&End));
+																			//m_pD3DDevice->SetRenderState(D3DRS_FOGDENSITY, *(DWORD *)(&Density));
 
 																			// サンプラーステートの設定
 	m_pD3DDevice->SetSamplerState(0, D3DSAMP_ADDRESSU, D3DTADDRESS_WRAP);	// テクスチャアドレッシング方法(U値)を設定
@@ -131,20 +129,6 @@ HRESULT CRenderer::Init(HINSTANCE hInstance, HWND hWnd, bool bWindow)
 	// デバッグ情報表示用フォントの生成
 	D3DXCreateFont(m_pD3DDevice, 28, 5, 0, 0, FALSE, SHIFTJIS_CHARSET,
 		OUT_DEFAULT_PRECIS, DEFAULT_QUALITY, DEFAULT_PITCH, "Terminal", &m_pFont);
-
-	// カメラの生成
-	if (m_pCamera[0] == NULL && m_pCamera[1] == NULL)
-	{
-		m_pCamera[0] = new CCamera;
-		m_pCamera[0]->Init();
-		m_pCamera[0]->SetViewport(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, 0);
-		m_pCamera[0]->SetAngleView(PLAYER_CAMERA_ANGLE_OF_VIEW);
-
-		//m_pCamera[1] = new CCamera;
-		//m_pCamera[1]->Init();
-		//m_pCamera[1]->SetViewport(SCREEN_WIDTH-200,0, 200, 200, 0);
-		//m_pCamera[1]->SetAngleView(MAP_ANGLE_OF_VIEW);
-	}
 
 	return S_OK;
 }
@@ -185,12 +169,7 @@ void CRenderer::Uninit(void)
 void CRenderer::Update(void)
 {
 	CScene::UpdateAll();
-	for (int nCnt = 0; nCnt < 2; nCnt++)
-	{
 
-		// カメラの更新
-		m_pCamera[nCnt]->Update();
-	}
 }
 
 //=============================================================================
@@ -199,84 +178,27 @@ void CRenderer::Update(void)
 void CRenderer::Draw(void)
 {
 
+	// バックバッファ＆Ｚバッファのクリア
+	m_pD3DDevice->Clear(0,
+		NULL,
+		(D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER),
+		D3DCOLOR_RGBA(0, 0, 0, 0), 1.0f, 0);
+
 	// Direct3Dによる描画の開始
 	if (SUCCEEDED(m_pD3DDevice->BeginScene()))
 	{
-		D3DVIEWPORT9 CurrentViewPort;
-		m_pD3DDevice->GetViewport(&CurrentViewPort);
-		for (int nCnt = 0; nCnt < 1; nCnt++)
-		{
-			m_pD3DDevice->SetViewport(&m_pCamera[nCnt]->GetViewport());
-			// バックバッファ＆Ｚバッファのクリア
-			m_pD3DDevice->Clear(0,
-				NULL,
-				(D3DCLEAR_TARGET | D3DCLEAR_ZBUFFER),
-				D3DCOLOR_RGBA(0, 0, 0, 0), 1.0f, 0);
-
-			// カメラの設定
-			m_pCamera[nCnt]->SetCamera();
-			CGame *pGame = CManager::GetGame();
-			if (pGame != NULL)
-			{
-				LPDIRECT3DDEVICE9 pDevice = CManager::GetRenderer()->GetDevice();//デバイスのポインタ
-				D3DXVECTOR3 Pos, Rot;
-				Pos = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-				Rot = D3DXVECTOR3(0.0f, 0.0f, 0.0f);
-
-				D3DXMATRIX world_matrix, trans_matrix, rot_matrix;
-				D3DXMatrixIdentity(&world_matrix);
-
-				D3DXMatrixRotationYawPitchRoll(&rot_matrix, Rot.x, Rot.y, Rot.z);
-
-				//D3DXMatrixMultiply(&world_matrix, &world_matrix, &rot_matrix);
-
-				D3DXMatrixTranslation(&trans_matrix, Pos.x, Pos.y, Pos.z);
-
-				//D3DXMatrixMultiply(&world_matrix, &world_matrix, &trans_matrix);
-
-
-				pDevice->SetTransform(D3DTS_WORLD, &world_matrix);
-				pGame->Draw();
-			}
-
-			if (nCnt == 0)
-			{
-				////フォグの処理
-				//float Start = 0.0f;    // For linear mode
-				//float End = 3000.0f;
-				//						 // Enable fog blending.
-				//m_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, TRUE);
-
-				//// Set the fog color.
-				//m_pD3DDevice->SetRenderState(D3DRS_FOGCOLOR, D3DCOLOR_ARGB(10, 10, 10, 15));
-
-				//// Set fog parameters.
-				//m_pD3DDevice->SetRenderState(D3DRS_FOGTABLEMODE, D3DFOG_LINEAR);
-				//m_pD3DDevice->SetRenderState(D3DRS_FOGSTART, *(DWORD *)(&Start));
-				//m_pD3DDevice->SetRenderState(D3DRS_FOGEND, *(DWORD *)(&End));
-
-				//オブジェクトの描画
-				CScene::DrawAll();
-
-			}
-			if (nCnt == 1)
-			{
-				//m_pD3DDevice->SetRenderState(D3DRS_FOGENABLE, FALSE);
-
-				CScene::MapDraw();
-			}
+		CScene::DrawAll();
 #ifdef _DEBUG
-			// FPS表示
-			DrawFPS();
+		// FPS表示
+		DrawFPS();
 #endif
-		}
-		m_pD3DDevice->SetViewport(&CurrentViewPort);
-
 		// Direct3Dによる描画の終了
 		m_pD3DDevice->EndScene();
 	}
+
 	// バックバッファとフロントバッファの入れ替え
 	m_pD3DDevice->Present(NULL, NULL, NULL, NULL);
+
 
 }
 
