@@ -43,12 +43,28 @@ void CTexture::Init(void)
 		&m_pTexture[Test]);
 	//テクスチャの読み込み
 	D3DXCreateTextureFromFile(pDevice,
-		"data/TEXTURE/number000.png",//数字
+		"data/TEXTURE/time_number000.png",//数字
 		&m_pTexture[TIME]);
 	//テクスチャの読み込み
 	D3DXCreateTextureFromFile(pDevice,
 		"data/TEXTURE/fade.png",//数字
 		&m_pTexture[FADE]);
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/Win.png",//数字
+		&m_pTexture[WIN]);
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/Lose.png",//数字
+		&m_pTexture[LOSE]);
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/1P.png",//数字
+		&m_pTexture[PLAYER01]);
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/2P.png",//数字
+		&m_pTexture[PLAYER02]);
 
 	//============================================================
 	//タイトル

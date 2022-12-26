@@ -52,6 +52,12 @@
     <Filter Include="Script\プレイヤー">
       <UniqueIdentifier>{95485db0-8b98-4ed1-8c3a-1e7fd36218b7}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Script\タイマー">
+      <UniqueIdentifier>{8fb8adca-7019-4ef6-8903-f30aac46f6df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Script\UI系">
+      <UniqueIdentifier>{f0803071-607e-4265-879d-c150a13b8f09}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="title.cpp">
@@ -108,6 +114,13 @@
     <ClCompile Include="player.cpp">
       <Filter>Script\プレイヤー</Filter>
     </ClCompile>
+    <ClCompile Include="timer.cpp">
+      <Filter>Script\タイマー</Filter>
+    </ClCompile>
+    <ClCompile Include="move_ui.cpp">
+      <Filter>Script\UI系</Filter>
+    </ClCompile>
+    <ClCompile Include="vibrationPolygon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="title.h">
@@ -164,5 +177,12 @@
     <ClInclude Include="player.h">
       <Filter>Script\プレイヤー</Filter>
     </ClInclude>
+    <ClInclude Include="timer.h">
+      <Filter>Script\タイマー</Filter>
+    </ClInclude>
+    <ClInclude Include="move_ui.h">
+      <Filter>Script\UI系</Filter>
+    </ClInclude>
+    <ClInclude Include="vibrationPolygon.h" />
   </ItemGroup>
 </Project>

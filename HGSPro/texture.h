@@ -27,6 +27,10 @@ public:
 		TIME,			// タイムナンバー
 		FADE,			
 		Title,			//タイトル背景
+		WIN,
+		LOSE,
+		PLAYER01,
+		PLAYER02,
 		Max,			// テクスチャの最大数
 	} Type;
 

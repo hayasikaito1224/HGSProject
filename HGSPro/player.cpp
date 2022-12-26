@@ -17,6 +17,11 @@ CPlayer::CPlayer(OBJTYPE nPriority) : CScene(nPriority)
 {
 	m_State = CPlayer::STATE::NORMAL;
 	m_pPolygon = nullptr;
+	m_bPlay = false;
+	for (int nCnt = 0; nCnt < NumPlayer; nCnt++)
+	{
+		m_nPushCounter[nCnt] = 0;
+	}
 }
 
 CPlayer::~CPlayer()
@@ -51,10 +56,14 @@ void CPlayer::Uninit()
 //=============================================================================
 void CPlayer::Update()
 {
-	PushTrigger(DIK_A, 0);
-	PushTrigger(DIK_D, 0);
-	PushTrigger(DIK_SEMICOLON, 1);
-	PushTrigger(DIK_RBRACKET, 1);
+	if (m_bPlay)
+	{
+		PushTrigger(DIK_A, 0);
+		PushTrigger(DIK_D, 0);
+		PushTrigger(DIK_SEMICOLON, 1);
+		PushTrigger(DIK_RBRACKET, 1);
+
+	}
 
 }
 
@@ -76,9 +85,13 @@ void CPlayer::DebugTextDraw()
 	int nNum = 0;
 
 	nNum = sprintf(&str[0], "\n\n 情報 \n");
+	int nDifference01 = m_nPushCounter[0] - m_nPushCounter[1];
+	int nDifference02 = m_nPushCounter[1] - m_nPushCounter[0];
 
 	nNum += sprintf(&str[nNum], " [PushCnt{player1}] %d\n", m_nPushCounter[0]);
 	nNum += sprintf(&str[nNum], " [PushCnt{player2}] %d\n", m_nPushCounter[1]);
+	nNum += sprintf(&str[nNum], " [Difference{player1}] %d\n", nDifference01);
+	nNum += sprintf(&str[nNum], " [Difference{player2}] %d\n", nDifference02);
 
 	LPD3DXFONT pFont = CManager::GetRenderer()->GetFont();
 	// テキスト描画
@@ -115,5 +128,26 @@ void CPlayer::PushTrigger(int nKey, int nPlayer)
 //=============================================================================
 void CPlayer::PushCntDeduction()
 {
+	//プレイヤー1の差
+	int nDifference01 = m_nPushCounter[0] - m_nPushCounter[1];
+	int nDifference02 = m_nPushCounter[1] - m_nPushCounter[0];
 
+	switch (nDifference01)
+	{
+	case CntLeaveMax_1:
+		//塔のテクスチャアニメーションを優勢一段階目にする
+		break;
+	case CntLeaveMax_2:
+		//塔のテクスチャアニメーションを優勢二段階目にする
+		break;
+	}
+	switch (nDifference02)
+	{
+	case CntLeaveMax_1:
+		//塔のテクスチャアニメーションを優勢一段階目にする
+		break;
+	case CntLeaveMax_2:
+		//塔のテクスチャアニメーションを優勢二段階目にする
+		break;
+	}
 }
