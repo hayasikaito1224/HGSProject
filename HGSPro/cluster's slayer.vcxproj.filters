@@ -96,11 +96,11 @@
     <ClCompile Include="texture.cpp">
       <Filter>Script\テクスチャ</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\デスクトップアプリ避難所\cluster-s-slayer\cluster%27s slayer\polygon.cpp">
-      <Filter>Script\ポリゴン</Filter>
-    </ClCompile>
     <ClCompile Include="Renderer.cpp">
       <Filter>Script\描画</Filter>
+    </ClCompile>
+    <ClCompile Include="polygon.cpp">
+      <Filter>Script\ポリゴン</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -149,11 +149,11 @@
     <ClInclude Include="texture.h">
       <Filter>Script\テクスチャ</Filter>
     </ClInclude>
-    <ClInclude Include="..\..\デスクトップアプリ避難所\cluster-s-slayer\cluster%27s slayer\Polygon.h">
-      <Filter>Script\ポリゴン</Filter>
-    </ClInclude>
     <ClInclude Include="Renderer.h">
       <Filter>Script\描画</Filter>
+    </ClInclude>
+    <ClInclude Include="Polygon.h">
+      <Filter>Script\ポリゴン</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

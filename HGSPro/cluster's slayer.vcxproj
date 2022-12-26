@@ -19,7 +19,6 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\デスクトップアプリ避難所\cluster-s-slayer\cluster%27s slayer\polygon.cpp" />
     <ClCompile Include="2Dnumber.cpp" />
     <ClCompile Include="bg.cpp" />
     <ClCompile Include="effect2d.cpp" />
@@ -29,6 +28,7 @@
     <ClCompile Include="keyboard.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="manager.cpp" />
+    <ClCompile Include="polygon.cpp" />
     <ClCompile Include="Renderer.cpp" />
     <ClCompile Include="result.cpp" />
     <ClCompile Include="scene.cpp" />
@@ -38,7 +38,6 @@
     <ClCompile Include="title.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\デスクトップアプリ避難所\cluster-s-slayer\cluster%27s slayer\Polygon.h" />
     <ClInclude Include="2Dnumber.h" />
     <ClInclude Include="bg.h" />
     <ClInclude Include="effect2d.h" />
@@ -48,6 +47,7 @@
     <ClInclude Include="keyboard.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="manager.h" />
+    <ClInclude Include="Polygon.h" />
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="result.h" />
     <ClInclude Include="scene.h" />
