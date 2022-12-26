@@ -10,12 +10,21 @@ CSound::PARAM CSound::m_aParam[SOUND_LABEL_MAX] =
 	// ＢＧＭ
 	//=======================================================================================
 	{ "data\\BGM\\Title.wav"	, XAUDIO2_LOOP_INFINITE },			// タイトルのBGM
-	{ "data\\BGM\\Filed.wav"	, XAUDIO2_LOOP_INFINITE },			// ゲームのBGM
+	{ "data\\BGM\\BGM_000.wav"	, XAUDIO2_LOOP_INFINITE },			// ゲームのBGM
+	{ "data\\BGM\\BGM_003.wav"	, XAUDIO2_LOOP_INFINITE },			// ゲームのBGM
 	
 	//=======================================================================================
 	// ＳＥ
 	//=======================================================================================
-	{ "data\\SE\\Enter.wav"					, XAUDIO2_NO_LOOP_REGION },		// 決定音
+	{ "data\\SE\\SE_Click_000.wav"			, XAUDIO2_NO_LOOP_REGION },		// 決定音
+	{ "data\\SE\\SE_Punch_000.wav"			, XAUDIO2_NO_LOOP_REGION },		// プレイヤー連打音
+
+	{ "data\\SE\\SE_GameStart_000.wav"		, XAUDIO2_NO_LOOP_REGION },		// ゲーム開始音
+	{ "data\\SE\\SE_GameEnd_000.wav"		, XAUDIO2_NO_LOOP_REGION },		// ゲーム終了音
+	{ "data\\SE\\SE_RESULT_001.wav"			, XAUDIO2_NO_LOOP_REGION },		// 結果発表音
+
+	{ "data\\SE\\SE_Damage_000.wav"			, XAUDIO2_NO_LOOP_REGION },		// 倒壊音
+	{ "data\\SE\\SE_Crash_002.wav"			, XAUDIO2_NO_LOOP_REGION },		// 倒壊音(ズドン)
 };
 
 CSound::CSound()
