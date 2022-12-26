@@ -9,7 +9,7 @@
 #include <math.h>
 #include "Polygon.h"
 static const int MaxTime = 20;
-static const D3DXVECTOR3 Scale = { 20.0f,30.0f,0.0 };
+static const D3DXVECTOR3 Scale = { 40.0f,60.0f,0.0 };
 //--------------------------
 //コンストラクト
 //----------------------------
@@ -42,13 +42,6 @@ HRESULT CTimer::Init()
 		//ナンバーの桁数分生成
 		m_pSecond[nCnt] = C2DNumber::Create(D3DXVECTOR3(((Scale.x * 2)* nCnt) + m_pos.x, m_pos.y, 0.0f), Scale);
 		m_pSecond[nCnt]->SetCol(m_col);
-
-	}
-	for (int nCnt = 0; nCnt < SECONDNUMBERS_MAX; nCnt++)
-	{
-		//ナンバーの桁数分生成
-		pPolygon[nCnt] = CPolygon::Create({ m_pos.x - (Scale.x + 8.0f), m_pos.y + (-10.0f + (20.0f*nCnt)), 0.0f }, { 5.0f,5.0f,0.0f }, CTexture::None);
-		pPolygon[nCnt]->SetCol({ 0.0f,0.0f,0.0f,1.0 });
 
 	}
 	//スコアの数値を更新し続ける

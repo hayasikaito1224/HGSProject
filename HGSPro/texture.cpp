@@ -70,6 +70,98 @@ void CTexture::Init(void)
 		"data/TEXTURE/Tower000.png",//数字
 		&m_pTexture[TOWER]);
 
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/UI_1P.png",//数字
+		&m_pTexture[UI_1P]);
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/UI_2P.png",//数字
+		&m_pTexture[UI_2P]);
+
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/Button00_A.png",//数字
+		&m_pTexture[ButtonA]);
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/Button00_D.png",//数字
+		&m_pTexture[ButtonD]);
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/Button00_LeftArrow.png",//数字
+		&m_pTexture[ButtonL]);
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/Button00_RightArrow.png",//数字
+		&m_pTexture[ButtonR]);
+
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/Button01_A.png",//数字
+		&m_pTexture[ButtonA_Put]);
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/Button01_D.png",//数字
+		&m_pTexture[ButtonD_Put]);
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/Button01_LeftArrow.png",//数字
+		&m_pTexture[ButtonL_Put]);
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/Button01_RightArrow.png",//数字
+		&m_pTexture[ButtonR_Put]);
+
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/Rule.png",//数字
+		&m_pTexture[Rule]);
+
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/time_byou.png",//数字
+		&m_pTexture[TimeSecond]);
+
+
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/Title001.png",//数字
+		&m_pTexture[TitleLogo]);
+
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/ready000.png",//数字
+		&m_pTexture[Target]);
+
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/ready000.png",//数字
+		&m_pTexture[Target]);
+
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/start000.png",//数字
+		&m_pTexture[Start]);
+
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/End000.png",//数字
+		&m_pTexture[EndUI]);
+
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/BG000.png",//数字
+		&m_pTexture[BG]);
+
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/Caution000.png",//数字
+		&m_pTexture[Denger]);
+	//テクスチャの読み込み
+	D3DXCreateTextureFromFile(pDevice,
+		"data/TEXTURE/End002.png",//数字
+		&m_pTexture[PushSpace]);
 	//============================================================
 	//タイトル
 	//============================================================

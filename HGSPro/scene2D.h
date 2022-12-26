@@ -50,7 +50,6 @@ public:
 	void ColorChange(D3DCOLORVALUE color);	//ƒJƒ‰[•ÏX
 	void SetRotate(D3DXVECTOR3 pos, float Rotate, float Rotate2, float Vectol);			//‰ñ“]
 
-
 private:
 
 protected:

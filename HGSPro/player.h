@@ -14,6 +14,8 @@ class CPlayer : public CScene
 public:
 
 	static const int NumPlayer = 2;
+	static const int MaxKey = 4;
+	static const int MaxPut = 2;
 
 	enum class STATE
 	{
@@ -37,11 +39,15 @@ public:
 	void PushCntDeduction();//ƒvƒŒƒCƒ„[‚Ì‰Ÿ‰º”‚Ì·‚µˆø‚«
 	int *GetPushCnt() { return m_nPushCounter; }
 	void SetPlay(bool bPlay) { m_bPlay = bPlay; }
+	void SetLose(int nNumPlayer);
+	CVibrationPolygon *GetPlayerPol(int nNumPlayer) { return m_pPlayer[nNumPlayer]; }
 private:
 	int m_nPushCounter[NumPlayer];
 	int m_nVibTime[NumPlayer];
 	bool m_bPlay;
 	CPolygon *m_pPolygon;
+	CPolygon *m_pKeyUI[MaxKey][MaxPut];
+
 	CVibrationPolygon *m_pPlayer[NumPlayer];
 
 	STATE m_State;

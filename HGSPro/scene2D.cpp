@@ -326,3 +326,4 @@ void CScene2D::SetRotate(D3DXVECTOR3 pos, float Rotate, float Rotate2, float Vec
 	//頂点バッファをアンロック
 	m_pVtxBuff->Unlock();
 }
+

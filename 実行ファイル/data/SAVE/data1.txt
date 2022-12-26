@@ -1,0 +1,4 @@
+ClearPercent=5
+HaveMoney=0
+Skill=1
+

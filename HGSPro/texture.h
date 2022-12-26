@@ -24,10 +24,29 @@ public:
 	{
 		None = -1,		// テクスチャ無し
 		Test,			// 仮テクスチャ
+		BG,
 		TIME,			// タイムナンバー
+		TimeSecond,
+		TitleLogo,
 		FADE,			
 		Title,			//タイトル背景
+		ButtonA,
+		ButtonD,
+		ButtonL,
+		ButtonR,
+		ButtonA_Put,
+		ButtonD_Put,
+		ButtonL_Put,
+		ButtonR_Put,
+		UI_1P,
+		UI_2P,
+		Rule,
+		Target,
+		Start,
+		EndUI,
 		TOWER,
+		Denger,
+		PushSpace,
 		WIN,
 		LOSE,
 		PLAYER01,

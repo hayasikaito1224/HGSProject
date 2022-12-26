@@ -308,7 +308,7 @@ void CManager::SetMode(MODE mode)
 			m_pGame = new CGame;
 			m_pGame->Init();
 			m_pSound->PlaySound(m_pSound->SOUND_LABEL_BGM_GAME);	// タイトルサウンド
-			//m_pSound->ControllVoice(m_pSound->SOUND_LABEL_BGM_GAME, 0.1f);
+			m_pSound->ControllVoice(m_pSound->SOUND_LABEL_BGM_GAME, 0.3f);
 		}
 		break;
 	case MODE_RESULT:		//リザルト画面

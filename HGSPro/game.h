@@ -39,6 +39,8 @@ private:
 	static CPlayer *m_pPlayer;
 	static CTimer *m_pTimer;
 	CBg		*m_pBg02;
+	CPolygon *m_pPushSpace;
+	CPolygon *m_pDanger[2];
 	CPolygon *m_pTutorial;
 	CPolygon *m_pTower;
 	CMove_UI *m_pTargetUI;
