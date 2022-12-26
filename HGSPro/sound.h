@@ -25,8 +25,7 @@ public:
 		// ＢＧＭ
 		//--------------------------
 		SOUND_LABEL_BGM_TITLE = 0,			// タイトルのBGM
-		SOUND_LABEL_BGM_GAME01,				// ゲームのBGM
-		SOUND_LABEL_BGM_GAME02,				// ゲームのBGM
+		SOUND_LABEL_BGM_GAME,				// ゲームのBGM
 
 		//--------------------------
 		// ＳＥ
@@ -38,7 +37,7 @@ public:
 		SOUND_LABEL_SE_GAMEFINISH,			// ゲーム終了音
 		SOUND_LABEL_SE_RESULT,				// 結果発表音
 
-		SOUND_LABEL_SE_CRASH01,				// 倒壊音
+		SOUND_LABEL_SE_CRASH01,				// 倒壊音(倒れ中)
 		SOUND_LABEL_SE_CRASH02,				// 倒壊音(ズドン)
 
 		SOUND_LABEL_MAX

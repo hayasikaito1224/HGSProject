@@ -11,7 +11,6 @@ CSound::PARAM CSound::m_aParam[SOUND_LABEL_MAX] =
 	//=======================================================================================
 	{ "data\\BGM\\Title.wav"	, XAUDIO2_LOOP_INFINITE },			// É^ÉCÉgÉãÇÃBGM
 	{ "data\\BGM\\BGM_000.wav"	, XAUDIO2_LOOP_INFINITE },			// ÉQÅ[ÉÄÇÃBGM
-	{ "data\\BGM\\BGM_003.wav"	, XAUDIO2_LOOP_INFINITE },			// ÉQÅ[ÉÄÇÃBGM
 	
 	//=======================================================================================
 	// ÇrÇd
