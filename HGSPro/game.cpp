@@ -14,13 +14,15 @@
 
 //静的メンバ変数宣言
 CBg		*CGame::m_pBg = nullptr;
-
+CPlayer *CGame::m_pPlayer = nullptr;
 //--------------------------------------------
 //コンストラクタ
 //--------------------------------------------
 CGame::CGame()
 {
 	m_bNextMode = false;
+	m_pBg = nullptr;
+	m_pPlayer = nullptr;
 }
 //--------------------------------------------
 //デストラクタ
@@ -33,9 +35,13 @@ CGame::~CGame()
 //--------------------------------------------
 HRESULT CGame::Init(void)
 {
-	if (!m_pBg)
+	//if (!m_pBg)
+	//{
+	//	m_pBg = CBg::Create(CTexture::Type::TIME);
+	//}
+	if (!m_pPlayer)
 	{
-		m_pBg = CBg::Create(CTexture::Type::TIME);
+		m_pPlayer = CPlayer::Create();
 	}
 	return S_OK;
 }
@@ -44,6 +50,16 @@ HRESULT CGame::Init(void)
 //--------------------------------------------
 void CGame::Uninit(void)
 {
+	if (m_pBg)
+	{
+		m_pBg->Uninit();
+		m_pBg = nullptr;
+	}
+	if (m_pPlayer)
+	{
+		m_pPlayer->Uninit();
+		m_pPlayer = nullptr;
+	}
 }
 //--------------------------------------------
 //更新

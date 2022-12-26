@@ -49,6 +49,9 @@
     <Filter Include="Script\ポリゴン">
       <UniqueIdentifier>{11f7df50-9815-4b35-b46d-0b2ce2043d00}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Script\プレイヤー">
+      <UniqueIdentifier>{95485db0-8b98-4ed1-8c3a-1e7fd36218b7}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="title.cpp">
@@ -102,6 +105,9 @@
     <ClCompile Include="polygon.cpp">
       <Filter>Script\ポリゴン</Filter>
     </ClCompile>
+    <ClCompile Include="player.cpp">
+      <Filter>Script\プレイヤー</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="title.h">
@@ -154,6 +160,9 @@
     </ClInclude>
     <ClInclude Include="Polygon.h">
       <Filter>Script\ポリゴン</Filter>
+    </ClInclude>
+    <ClInclude Include="player.h">
+      <Filter>Script\プレイヤー</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

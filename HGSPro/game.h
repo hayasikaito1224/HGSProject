@@ -24,6 +24,7 @@ public:
 	//static CPlayer *GetPlayer() { return m_Player; }
 private:
 	static CBg			*m_pBg;
+	static CPlayer *m_pPlayer;
 	bool m_bNextMode;
 
 };

@@ -1,31 +1,35 @@
-//=============================================-
-//プレイヤーのクラス
-//=============================================
+//=============================================================================
+//
+// プレイヤー処理
+//
+//=============================================================================
 #ifndef _PLAYER_H_
 #define _PLAYER_H_
-#define MAX_ASSISTCRYSTAL (2)
-#define MAX_HEAL_LEVEL (5)
-class CEnemy;
-class CSword;
-class CGuard;
-class CMissile;
-class CAssistCrystal;
-class CAssistCrystal_Model;
+#include "scene.h"
+
+class CPolygon;
 
 class CPlayer : public CScene
 {
 public:
 
-	CPlayer(OBJTYPE nPriority = CScene::OBJTYPE_NONE);
+	static const int NumPlayer = 2;
+
+	CPlayer(OBJTYPE nPriority = OBJTYPE_POLYGON);
 	~CPlayer();
 	HRESULT Init();
 	void Uninit();
 	void Update();
 	void Draw();
 	static CPlayer *Create();
-private:
+	void DebugTextDraw();
+	void PushTrigger(int nKey,int nPlayer);
 
+private:
+	int m_nPushCounter[NumPlayer];
+	CPolygon *m_pPolygon;
 };
 
-#endif // !_PLAYER_H_
 
+
+#endif
