@@ -9,8 +9,13 @@
 #include "Renderer.h"
 #include "manager.h"
 
+static const int CntLeaveMax_1 = 100;
+static const int CntLeaveMax_2 = 200;
+
+
 CPlayer::CPlayer(OBJTYPE nPriority) : CScene(nPriority)
 {
+	m_State = CPlayer::STATE::NORMAL;
 	m_pPolygon = nullptr;
 }
 
@@ -104,4 +109,11 @@ void CPlayer::PushTrigger(int nKey, int nPlayer)
 	{
 		m_nPushCounter[nPlayer]++;
 	}
+}
+//=============================================================================
+//ƒvƒŒƒCƒ„[‚Ì‰Ÿ‰º”‚Ì·‚µˆø‚«
+//=============================================================================
+void CPlayer::PushCntDeduction()
+{
+
 }
