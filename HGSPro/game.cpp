@@ -57,6 +57,7 @@ CGame::CGame()
 	m_pBg02 = nullptr;
 	m_pPushSpace = nullptr;
 	m_pTower = nullptr;
+	m_pTitleLogo = nullptr;
 	m_bResult = false;
 	m_nUITimer = 0;
 }
@@ -84,12 +85,21 @@ HRESULT CGame::Init(void)
 	}
 	if (!m_pBg02)
 	{
-		m_pBg02 = CBg::Create(CTexture::Type::FADE, CScene::OBJTYPE::OBJTYPE_FADE);
+		m_pBg02 = CBg::Create(CTexture::Type::FADE, CScene::OBJTYPE::OBJTYPE_UI);
 		m_pBg02->SetCol({ 1.0,1.0,1.0,0.5f });
 	}
+	if (!m_pTimer)
+	{
+		m_pTimer = CTimer::Create(TimerPos, { 1.0,1.0,1.0,1.0 }, CTimer::STATE::SUB, MaxGameTime, false);
+	}
+
 	if (!m_pTutorial)
 	{
-		m_pTutorial = CPolygon::Create({ SCREEN_WIDTH / 2.0f,400.0f,0.0 }, { 400.0f,250.0f,0.0f }, CTexture::Type::Rule, { 1.0,1.0,1.0,1.0 }, CScene::OBJTYPE::OBJTYPE_FADE);
+		m_pTutorial = CPolygon::Create({ SCREEN_WIDTH / 2.0f,450.0f,0.0 }, { 400.0f,250.0f,0.0f }, CTexture::Type::Rule, { 1.0,1.0,1.0,1.0 }, CScene::OBJTYPE::OBJTYPE_FADE);
+	}
+	if (!m_pTitleLogo)
+	{
+		m_pTitleLogo = CPolygon::Create({ SCREEN_WIDTH / 2.0f,100.0f,0.0f }, { 300.0f,100.0f,0.0 }, CTexture::Type::TitleLogo, { 1.0,1.0,1.0,1.0 }, CScene::OBJTYPE::OBJTYPE_FADE);
 	}
 	if (!m_pDanger[0])
 	{
@@ -107,10 +117,7 @@ HRESULT CGame::Init(void)
 		m_pDanger[nCnt]->SetDraw(false);
 	}
 
-	if (!m_pTimer)
-	{
-		m_pTimer = CTimer::Create(TimerPos, { 1.0,1.0,1.0,1.0 }, CTimer::STATE::SUB, MaxGameTime, false);
-	}
+
 	if (!m_pPlayer)
 	{
 		m_pPlayer = CPlayer::Create();
@@ -134,6 +141,11 @@ void CGame::Uninit(void)
 			m_pDanger[nCnt] = nullptr;
 		}
 
+	}
+	if (m_pTitleLogo)
+	{
+		m_pTitleLogo->Uninit();
+		m_pTitleLogo = nullptr;
 	}
 	if (m_pPushSpace)
 	{
@@ -222,6 +234,11 @@ void CGame::Update(void)
 			{
 				m_pBg02->Uninit();
 				m_pBg02 = nullptr;
+			}
+			if (m_pTitleLogo)
+			{
+				m_pTitleLogo->Uninit();
+				m_pTitleLogo = nullptr;
 			}
 			if (!m_pTargetUI)
 			{
@@ -454,6 +471,11 @@ void CGame::Reset()
 			m_pDanger[nCnt] = nullptr;
 		}
 
+	}
+	if (m_pTitleLogo)
+	{
+		m_pTitleLogo->Uninit();
+		m_pTitleLogo = nullptr;
 	}
 	if (m_pPushSpace)
 	{

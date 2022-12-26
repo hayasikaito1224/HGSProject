@@ -40,6 +40,7 @@ private:
 	static CTimer *m_pTimer;
 	CBg		*m_pBg02;
 	CPolygon *m_pPushSpace;
+	CPolygon *m_pTitleLogo;
 	CPolygon *m_pDanger[2];
 	CPolygon *m_pTutorial;
 	CPolygon *m_pTower;
