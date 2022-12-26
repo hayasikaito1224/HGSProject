@@ -327,6 +327,7 @@ void CGame::Update(void)
 		//ŽžŠÔØ‚ê
 		if (m_nUITimer >= FinishUIPop)
 		{
+			m_pTimer->SetCanCount(false);
 
 			if (!m_pFinishUI)
 			{
